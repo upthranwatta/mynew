@@ -1,0 +1,222 @@
+<html>
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      var rate,unit;
+
+      $("#send_track").click(function(){  
+
+        unit=$("#unit").val();
+
+        rate=$("#rate").val();
+
+        type=$("#type").val();
+        
+        $("#message").text("Sending .......Please wait");
+
+
+
+
+
+        
+
+
+        $.get("http://localhost:8080/monitorGraph",{unit:unit,type:type},function(data){
+        if(data=="sent")
+        {
+          $("#message").empty().html("<p>Track "+unit+" . Please check inbox !</p>");
+        }
+    });
+  });
+
+  $("#end_track").click(function(){  
+
+        unit=$("#unit").val();
+        $("#message").text("Deleting ....... wait");
+        $.get("http://localhost:8080/monitorGraphStop",{unit:unit},function(data){
+        if(data=="sent")
+        {
+          $("#message").empty().html("<p>Track "+unit+" . Please check inbox !</p>");
+        }
+    });
+  });
+
+// -------------
+  $("#clear_sma").click(function(){  
+    
+        unit=$("#unit").val();
+
+        rate=$("#rate").val();
+
+        type=$("#type").val();
+        
+        $("#message").text("Cancelling .......Please wait");
+
+
+        $.get("http://localhost:8080/clear_sma",{unit:unit},function(data){
+        if(data=="sent")
+        {
+          $("#message").empty().html("<p>Track "+unit+" . Cancelled !</p>");
+        }
+    });
+  });
+// ----------------
+
+
+
+
+    });
+</script>
+
+
+
+<style>
+#container
+{
+  margin-left:400px;
+  margin-top:50px;
+}
+#unit,#rate
+{
+  font-family: "Segoe UI";
+  font-size:18px;
+  width:530px;
+}
+h1
+{
+  font-family: "Segoe UI";
+  font-size:40px; 
+  color: #3b5998;
+}
+p
+{
+  color:green;
+}
+#send_track
+{
+  font-size:15px;
+  font-family: "Segoe UI";
+}
+#message
+{
+  font-size:18px;
+}
+</style>
+
+
+
+
+</head>
+<body>
+  
+  <div id="container">
+<h1>TRACK FOREX RATE</h1>
+
+<select name="unit" id="unit">
+  <option value="EURUSD">EURUSD</option>
+  <option value="USDJPY">USDJPY</option>
+  <option value="GBPUSD">GBPUSD</option>
+  <option value="USDCHF">USDCHF</option>
+  <option value="EURCHF">EURCHF</option>
+  <option value="AUDUSD">AUDUSD</option>
+  <option value="USDCAD">USDCAD</option>
+  <option value="NZDUSD">NZDUSD</option>
+  <option value="EURJPY">EURJPY</option>
+  <option value="GBPJPY">GBPJPY</option>
+  <option value="EURGBP">EURGBP</option>
+  <option value="CHFJPY">CHFJPY</option>
+  <option value="GBPCHF">GBPCHF</option>
+  <option value="EURAUD">EURAUD</option>
+  <option value="EURCAD">EURCAD</option>
+  <option value="AUDCAD">AUDCAD</option>
+  <option value="AUDJPY">AUDJPY</option>
+  <option value="CADJPY">CADJPY</option>
+  <option value="NZDJPY">NZDJPY</option>
+  <option value="GBPAUD">GBPAUD</option>
+  <option value="AUDNZD">AUDNZD</option>
+  <option value="AUDCHF">AUDCHF</option>
+  <option value="EURNZD">EURNZD</option>
+  <option value="USDHKD">USDHKD</option>
+  <option value="USDMXN">USDMXN</option>
+  <option value="GBPNZD">GBPNZD</option>
+  <option value="USDSEK">USDSEK</option>
+  <option value="EURSEK">EURSEK</option>
+  <option value="EURNOK">EURNOK</option>
+  <option value="USDNOK">USDNOK</option>
+  <option value="USDZAR">USDZAR</option>
+  <option value="GBPCAD">GBPCAD</option>
+  <option value="USDTRY">USDTRY</option>
+  <option value="EURTRY">EURTRY</option>
+  <option value="NZDCHF">NZDCHF</option>
+  <option value="CADCHF">CADCHF</option>
+  <option value="NZDCAD">NZDCAD</option>
+  <option value="US30">US30</option>
+  <option value="SPX500">SPX500</option>
+  <option value="NAS100">NAS100</option>
+  <option value="UK100">UK100</option>
+  <option value="GER30">GER30</option>
+  <option value="ESP35">ESP35</option>
+  <option value="FRA40">FRA40</option>
+  <option value="HKG33">HKG33</option>
+  <option value="JPN225">JPN225</option>
+  <option value="AUS200">AUS200</option>
+  <option value="USOil">USOil</option>
+  <option value="UKOil">UKOil</option>
+  <option value="XAUUSD">XAUUSD</option>
+  <option value="XAGUSD">XAGUSD</option>
+  <option value="USDOLLAR">USDOLLAR</option>
+  <option value="USDILS">USDILS</option>
+  <option value="TRYJPY">TRYJPY</option>
+  <option value="USDCNH">USDCNH</option>
+  <option value="NGAS">NGAS</option>
+  <option value="Copper">Copper</option>
+  <option value="EUSTX50">EUSTX50</option>
+  <option value="Bund">Bund</option>
+  
+</select>
+
+<br>
+<!-- <input type="text" id="unit" placeholder="UNIT"> -->
+</br>
+
+<select name="type" id="type">
+  <option value="buy">BUY</option>
+  <option value="sell">SELL</option>
+</select>
+
+<br>
+</br>
+
+<!-- <input type="text" id="rate" placeholder="RATE"> -->
+
+<!-- <br>
+</br> -->
+
+<button id="send_track">Track</button><br>
+<br>
+
+<button id="end_track">END Track</button><br>
+<br>
+</br>
+
+<button id="send_sma">SMA TRACK</button><br>
+<br>
+
+
+<button id="clear_sma">SMA CLEAR</button><br>
+<br>
+</br>
+
+<span id="message"></span>
+<br>
+</br>
+
+
+
+</div>
+
+
+</body>
+</html>
