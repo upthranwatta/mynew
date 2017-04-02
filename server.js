@@ -3,7 +3,7 @@ var http=require('http');
 var nodemailer = require("nodemailer");
 var app=express();
 var xml2js =require('xml2js');
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 // var replaceall = require("replaceall");
 var fs = require('fs');
 var xml2js = require('xml2js');
@@ -24,7 +24,7 @@ var smtpTransport = nodemailer.createTransport({
 
 
 app.listen(port,function(){
-	console.log("Express Started on Port 8080");
+	console.log("Express Started on Port ...." + port);
 });
 
 
